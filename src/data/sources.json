@@ -1,0 +1,1003 @@
+[
+  {
+    "id": "callen-1985",
+    "kind": "textbook",
+    "authors": [
+      "Callen, H. B."
+    ],
+    "title": "Thermodynamics and an Introduction to Thermostatistics",
+    "year": 1985,
+    "role": "公设化热力学与热统桥接",
+    "status": "verified"
+  },
+  {
+    "id": "reif-1965",
+    "kind": "textbook",
+    "authors": [
+      "Reif, F."
+    ],
+    "title": "Fundamentals of Statistical and Thermal Physics",
+    "year": 1965,
+    "role": "本科到研究生过渡的统计物理主线",
+    "status": "verified"
+  },
+  {
+    "id": "pathria-2011",
+    "kind": "textbook",
+    "authors": [
+      "Pathria, R. K.",
+      "Beale, P. D."
+    ],
+    "title": "Statistical Mechanics",
+    "year": 2011,
+    "role": "系综、配分函数与涨落关系",
+    "status": "verified"
+  },
+  {
+    "id": "huang-1987",
+    "kind": "textbook",
+    "authors": [
+      "Huang, K."
+    ],
+    "title": "Statistical Mechanics",
+    "year": 1987,
+    "role": "量子统计、相变和场论入口",
+    "status": "verified"
+  },
+  {
+    "id": "landau-lifshitz-1980",
+    "kind": "textbook",
+    "authors": [
+      "Landau, L. D.",
+      "Lifshitz, E. M."
+    ],
+    "title": "Statistical Physics, Part 1",
+    "year": 1980,
+    "role": "热力学极限、涨落与相变",
+    "status": "verified"
+  },
+  {
+    "id": "kardar-particles-2007",
+    "kind": "textbook",
+    "authors": [
+      "Kardar, M."
+    ],
+    "title": "Statistical Physics of Particles",
+    "year": 2007,
+    "role": "微观分布到热势的现代推导",
+    "status": "verified"
+  },
+  {
+    "id": "kardar-fields-2007",
+    "kind": "textbook",
+    "authors": [
+      "Kardar, M."
+    ],
+    "title": "Statistical Physics of Fields",
+    "year": 2007,
+    "role": "临界现象与重整化群",
+    "status": "verified"
+  },
+  {
+    "id": "kittel-kroemer-1980",
+    "kind": "textbook",
+    "authors": [
+      "Kittel, C.",
+      "Kroemer, H."
+    ],
+    "title": "Thermal Physics",
+    "year": 1980,
+    "role": "直观热物理与统计推理",
+    "status": "verified"
+  },
+  {
+    "id": "schroeder-2000",
+    "kind": "textbook",
+    "authors": [
+      "Schroeder, D. V."
+    ],
+    "title": "An Introduction to Thermal Physics",
+    "year": 2000,
+    "role": "学习型热统概念入口",
+    "status": "verified"
+  },
+  {
+    "id": "blundell-2010",
+    "kind": "textbook",
+    "authors": [
+      "Blundell, S.",
+      "Blundell, K."
+    ],
+    "title": "Concepts in Thermal Physics",
+    "year": 2010,
+    "role": "概念图式和物理例题",
+    "status": "verified"
+  },
+  {
+    "id": "fermi-1936",
+    "kind": "monograph",
+    "authors": [
+      "Fermi, E."
+    ],
+    "title": "Thermodynamics",
+    "year": 1936,
+    "role": "经典热力学短程结构",
+    "status": "verified"
+  },
+  {
+    "id": "zemansky-dittman-1997",
+    "kind": "textbook",
+    "authors": [
+      "Zemansky, M. W.",
+      "Dittman, R. H."
+    ],
+    "title": "Heat and Thermodynamics",
+    "year": 1997,
+    "role": "传统热学和工程热力学",
+    "status": "needs-source"
+  },
+  {
+    "id": "tolman-1938",
+    "kind": "monograph",
+    "authors": [
+      "Tolman, R. C."
+    ],
+    "title": "The Principles of Statistical Mechanics",
+    "year": 1938,
+    "role": "经典统计力学体系化",
+    "status": "verified"
+  },
+  {
+    "id": "hill-1986",
+    "kind": "monograph",
+    "authors": [
+      "Hill, T. L."
+    ],
+    "title": "An Introduction to Statistical Thermodynamics",
+    "year": 1986,
+    "role": "化学势与小系统热统",
+    "status": "needs-source"
+  },
+  {
+    "id": "mcquarrie-1976",
+    "kind": "textbook",
+    "authors": [
+      "McQuarrie, D. A."
+    ],
+    "title": "Statistical Mechanics",
+    "year": 1976,
+    "role": "分子统计力学与化学应用",
+    "status": "needs-source"
+  },
+  {
+    "id": "chandler-1987",
+    "kind": "textbook",
+    "authors": [
+      "Chandler, D."
+    ],
+    "title": "Introduction to Modern Statistical Mechanics",
+    "year": 1987,
+    "role": "现代统计力学与涨落视角",
+    "status": "verified"
+  },
+  {
+    "id": "sethna-2006",
+    "kind": "textbook",
+    "authors": [
+      "Sethna, J. P."
+    ],
+    "title": "Statistical Mechanics: Entropy, Order Parameters, and Complexity",
+    "year": 2006,
+    "role": "熵、序参量与复杂系统入口",
+    "status": "verified"
+  },
+  {
+    "id": "goldenfeld-1992",
+    "kind": "textbook",
+    "authors": [
+      "Goldenfeld, N."
+    ],
+    "title": "Lectures on Phase Transitions and the Renormalization Group",
+    "year": 1992,
+    "role": "相变和重整化群",
+    "status": "verified"
+  },
+  {
+    "id": "chaikin-lubensky-1995",
+    "kind": "textbook",
+    "authors": [
+      "Chaikin, P. M.",
+      "Lubensky, T. C."
+    ],
+    "title": "Principles of Condensed Matter Physics",
+    "year": 1995,
+    "role": "凝聚态中的热统概念",
+    "status": "needs-source"
+  },
+  {
+    "id": "ma-1976",
+    "kind": "textbook",
+    "authors": [
+      "Ma, S.-K."
+    ],
+    "title": "Modern Theory of Critical Phenomena",
+    "year": 1976,
+    "role": "临界现象理论",
+    "status": "verified"
+  },
+  {
+    "id": "stanley-1971",
+    "kind": "monograph",
+    "authors": [
+      "Stanley, H. E."
+    ],
+    "title": "Introduction to Phase Transitions and Critical Phenomena",
+    "year": 1971,
+    "role": "临界指数和标度",
+    "status": "verified"
+  },
+  {
+    "id": "yeomans-1992",
+    "kind": "textbook",
+    "authors": [
+      "Yeomans, J. M."
+    ],
+    "title": "Statistical Mechanics of Phase Transitions",
+    "year": 1992,
+    "role": "相变学习路线",
+    "status": "needs-source"
+  },
+  {
+    "id": "le-bellac-2004",
+    "kind": "textbook",
+    "authors": [
+      "Le Bellac, M.",
+      "Mortessagne, F.",
+      "Batrouni, G. G."
+    ],
+    "title": "Equilibrium and Non-Equilibrium Statistical Thermodynamics",
+    "year": 2004,
+    "role": "平衡与非平衡桥接",
+    "status": "needs-source"
+  },
+  {
+    "id": "plischke-2006",
+    "kind": "textbook",
+    "authors": [
+      "Plischke, M.",
+      "Bergersen, B."
+    ],
+    "title": "Equilibrium Statistical Physics",
+    "year": 2006,
+    "role": "平衡统计物理",
+    "status": "needs-source"
+  },
+  {
+    "id": "reichl-2016",
+    "kind": "textbook",
+    "authors": [
+      "Reichl, L. E."
+    ],
+    "title": "A Modern Course in Statistical Physics",
+    "year": 2016,
+    "role": "现代统计物理课程",
+    "status": "needs-source"
+  },
+  {
+    "id": "de-groot-mazur-1962",
+    "kind": "monograph",
+    "authors": [
+      "de Groot, S. R.",
+      "Mazur, P."
+    ],
+    "title": "Non-Equilibrium Thermodynamics",
+    "year": 1962,
+    "role": "非平衡热力学",
+    "status": "verified"
+  },
+  {
+    "id": "kubo-toda-1991",
+    "kind": "monograph",
+    "authors": [
+      "Kubo, R.",
+      "Toda, M.",
+      "Hashitsume, N."
+    ],
+    "title": "Statistical Physics II",
+    "year": 1991,
+    "role": "涨落、响应与非平衡",
+    "status": "verified"
+  },
+  {
+    "id": "landau-lifshitz-fluid-1987",
+    "kind": "textbook",
+    "authors": [
+      "Landau, L. D.",
+      "Lifshitz, E. M."
+    ],
+    "title": "Fluid Mechanics",
+    "year": 1987,
+    "role": "输运与局域平衡背景",
+    "status": "needs-source"
+  },
+  {
+    "id": "greiner-1995",
+    "kind": "textbook",
+    "authors": [
+      "Greiner, W.",
+      "Neise, L.",
+      "Stoecker, H."
+    ],
+    "title": "Thermodynamics and Statistical Mechanics",
+    "year": 1995,
+    "role": "课程型热统材料",
+    "status": "needs-source"
+  },
+  {
+    "id": "diu-1989",
+    "kind": "textbook",
+    "authors": [
+      "Diu, B.",
+      "Guthmann, C.",
+      "Lederer, D.",
+      "Roulet, B."
+    ],
+    "title": "Elements of Statistical Mechanics",
+    "year": 1989,
+    "role": "统计物理教学条目",
+    "status": "needs-source"
+  },
+  {
+    "id": "atkins-2010",
+    "kind": "textbook",
+    "authors": [
+      "Atkins, P.",
+      "de Paula, J."
+    ],
+    "title": "Physical Chemistry",
+    "year": 2010,
+    "role": "化学热力学与相平衡",
+    "status": "needs-source"
+  },
+  {
+    "id": "dill-bromberg-2010",
+    "kind": "textbook",
+    "authors": [
+      "Dill, K.",
+      "Bromberg, S."
+    ],
+    "title": "Molecular Driving Forces",
+    "year": 2010,
+    "role": "分子视角的熵和自由能",
+    "status": "needs-source"
+  },
+  {
+    "id": "mayer-mayer-1940",
+    "kind": "monograph",
+    "authors": [
+      "Mayer, J. E.",
+      "Mayer, M. G."
+    ],
+    "title": "Statistical Mechanics",
+    "year": 1940,
+    "role": "集团展开与气体理论",
+    "status": "needs-source"
+  },
+  {
+    "id": "ruelle-1969",
+    "kind": "monograph",
+    "authors": [
+      "Ruelle, D."
+    ],
+    "title": "Statistical Mechanics: Rigorous Results",
+    "year": 1969,
+    "role": "严格热力学极限",
+    "status": "verified"
+  },
+  {
+    "id": "gallavotti-1999",
+    "kind": "monograph",
+    "authors": [
+      "Gallavotti, G."
+    ],
+    "title": "Statistical Mechanics: A Short Treatise",
+    "year": 1999,
+    "role": "动力系统式统计力学",
+    "status": "needs-source"
+  },
+  {
+    "id": "balian-2007",
+    "kind": "textbook",
+    "authors": [
+      "Balian, R."
+    ],
+    "title": "From Microphysics to Macrophysics",
+    "year": 2007,
+    "role": "宏观量涌现的系统推导",
+    "status": "needs-source"
+  },
+  {
+    "id": "carnot-1824",
+    "kind": "original",
+    "authors": [
+      "Carnot, S."
+    ],
+    "title": "Reflections on the Motive Power of Fire",
+    "year": 1824,
+    "role": "热机与可逆循环源头",
+    "status": "verified"
+  },
+  {
+    "id": "clapeyron-1834",
+    "kind": "original",
+    "authors": [
+      "Clapeyron, E."
+    ],
+    "title": "Memoir on the Motive Power of Heat",
+    "year": 1834,
+    "role": "Carnot 思想的数学化",
+    "status": "verified"
+  },
+  {
+    "id": "kelvin-1848",
+    "kind": "original",
+    "authors": [
+      "Thomson, W."
+    ],
+    "title": "On an Absolute Thermometric Scale",
+    "year": 1848,
+    "role": "绝对温标",
+    "status": "verified"
+  },
+  {
+    "id": "clausius-1850",
+    "kind": "original",
+    "authors": [
+      "Clausius, R."
+    ],
+    "title": "On the Moving Force of Heat",
+    "year": 1850,
+    "role": "热力学第二定律表述",
+    "status": "verified"
+  },
+  {
+    "id": "clausius-1865",
+    "kind": "original",
+    "authors": [
+      "Clausius, R."
+    ],
+    "title": "The Mechanical Theory of Heat",
+    "year": 1865,
+    "role": "熵概念与 Clausius 定义",
+    "status": "verified"
+  },
+  {
+    "id": "maxwell-1871",
+    "kind": "original",
+    "authors": [
+      "Maxwell, J. C."
+    ],
+    "title": "Theory of Heat",
+    "year": 1871,
+    "role": "分子运动论与 Maxwell 关系背景",
+    "status": "verified"
+  },
+  {
+    "id": "boltzmann-1872",
+    "kind": "original",
+    "authors": [
+      "Boltzmann, L."
+    ],
+    "title": "Further Studies on the Thermal Equilibrium of Gas Molecules",
+    "year": 1872,
+    "role": "Boltzmann 方程与 H 定理",
+    "status": "verified"
+  },
+  {
+    "id": "boltzmann-1877",
+    "kind": "original",
+    "authors": [
+      "Boltzmann, L."
+    ],
+    "title": "On the Relation Between the Second Law and Probability",
+    "year": 1877,
+    "role": "微观态计数与熵",
+    "status": "verified"
+  },
+  {
+    "id": "boltzmann-1896",
+    "kind": "monograph",
+    "authors": [
+      "Boltzmann, L."
+    ],
+    "title": "Lectures on Gas Theory",
+    "year": 1896,
+    "role": "气体动理论系统化",
+    "status": "needs-source"
+  },
+  {
+    "id": "gibbs-1876",
+    "kind": "original",
+    "authors": [
+      "Gibbs, J. W."
+    ],
+    "title": "On the Equilibrium of Heterogeneous Substances",
+    "year": 1876,
+    "role": "热势、相律与相平衡",
+    "status": "verified"
+  },
+  {
+    "id": "gibbs-1902",
+    "kind": "original",
+    "authors": [
+      "Gibbs, J. W."
+    ],
+    "title": "Elementary Principles in Statistical Mechanics",
+    "year": 1902,
+    "role": "系综方法源头",
+    "status": "verified"
+  },
+  {
+    "id": "planck-1901",
+    "kind": "original",
+    "authors": [
+      "Planck, M."
+    ],
+    "title": "On the Law of Distribution of Energy in the Normal Spectrum",
+    "year": 1901,
+    "role": "黑体辐射与量子统计入口",
+    "status": "verified"
+  },
+  {
+    "id": "planck-1906",
+    "kind": "monograph",
+    "authors": [
+      "Planck, M."
+    ],
+    "title": "Treatise on Thermodynamics",
+    "year": 1906,
+    "role": "经典热力学体系",
+    "status": "needs-source"
+  },
+  {
+    "id": "einstein-1905-brownian",
+    "kind": "original",
+    "authors": [
+      "Einstein, A."
+    ],
+    "title": "On the Movement of Small Particles Suspended in Stationary Liquids",
+    "year": 1905,
+    "role": "布朗运动与涨落",
+    "status": "verified"
+  },
+  {
+    "id": "einstein-1905-quanta",
+    "kind": "original",
+    "authors": [
+      "Einstein, A."
+    ],
+    "title": "On a Heuristic Point of View Concerning the Production and Transformation of Light",
+    "year": 1905,
+    "role": "光量子和热辐射",
+    "status": "verified"
+  },
+  {
+    "id": "einstein-1907-solid",
+    "kind": "original",
+    "authors": [
+      "Einstein, A."
+    ],
+    "title": "Die Plancksche Theorie der Strahlung und die Theorie der spezifischen Wärme",
+    "year": 1907,
+    "role": "Einstein 固体与量子热容",
+    "status": "verified"
+  },
+  {
+    "id": "bose-1924",
+    "kind": "original",
+    "authors": [
+      "Bose, S. N."
+    ],
+    "title": "Planck's Law and the Hypothesis of Light Quanta",
+    "year": 1924,
+    "role": "Bose 统计",
+    "status": "verified"
+  },
+  {
+    "id": "fermi-1926",
+    "kind": "original",
+    "authors": [
+      "Fermi, E."
+    ],
+    "title": "On the Quantum Theory of Radiation",
+    "year": 1926,
+    "role": "Fermi 统计入口",
+    "status": "verified"
+  },
+  {
+    "id": "dirac-1926",
+    "kind": "original",
+    "authors": [
+      "Dirac, P. A. M."
+    ],
+    "title": "On the Theory of Quantum Mechanics",
+    "year": 1926,
+    "role": "Fermi-Dirac 分布背景",
+    "status": "verified"
+  },
+  {
+    "id": "debye-1912",
+    "kind": "original",
+    "authors": [
+      "Debye, P."
+    ],
+    "title": "Zur Theorie der spezifischen Waermen",
+    "year": 1912,
+    "role": "Debye 模型",
+    "status": "verified"
+  },
+  {
+    "id": "van-der-waals-1873",
+    "kind": "original",
+    "authors": [
+      "van der Waals, J. D."
+    ],
+    "title": "On the Continuity of the Gaseous and Liquid States",
+    "year": 1873,
+    "role": "真实气体与临界点",
+    "status": "verified"
+  },
+  {
+    "id": "onsager-1931-a",
+    "kind": "original",
+    "authors": [
+      "Onsager, L."
+    ],
+    "title": "Reciprocal Relations in Irreversible Processes I",
+    "year": 1931,
+    "role": "Onsager 倒易关系",
+    "status": "verified"
+  },
+  {
+    "id": "onsager-1931-b",
+    "kind": "original",
+    "authors": [
+      "Onsager, L."
+    ],
+    "title": "Reciprocal Relations in Irreversible Processes II",
+    "year": 1931,
+    "role": "非平衡线性响应",
+    "status": "verified"
+  },
+  {
+    "id": "nyquist-1928",
+    "kind": "original",
+    "authors": [
+      "Nyquist, H."
+    ],
+    "title": "Thermal Agitation of Electric Charge in Conductors",
+    "year": 1928,
+    "role": "涨落噪声",
+    "status": "verified"
+  },
+  {
+    "id": "johnson-1928",
+    "kind": "original",
+    "authors": [
+      "Johnson, J. B."
+    ],
+    "title": "Thermal Agitation of Electricity in Conductors",
+    "year": 1928,
+    "role": "热噪声实验背景",
+    "status": "verified"
+  },
+  {
+    "id": "green-1954",
+    "kind": "original",
+    "authors": [
+      "Green, M. S."
+    ],
+    "title": "Markoff Random Processes and the Statistical Mechanics of Time-Dependent Phenomena",
+    "year": 1954,
+    "role": "Green-Kubo 关系",
+    "status": "verified"
+  },
+  {
+    "id": "kubo-1957",
+    "kind": "original",
+    "authors": [
+      "Kubo, R."
+    ],
+    "title": "Statistical-Mechanical Theory of Irreversible Processes",
+    "year": 1957,
+    "role": "线性响应与涨落耗散",
+    "status": "verified"
+  },
+  {
+    "id": "mori-1965",
+    "kind": "original",
+    "authors": [
+      "Mori, H."
+    ],
+    "title": "Transport, Collective Motion, and Brownian Motion",
+    "year": 1965,
+    "role": "投影算符和广义 Langevin",
+    "status": "verified"
+  },
+  {
+    "id": "zwanzig-1961",
+    "kind": "original",
+    "authors": [
+      "Zwanzig, R."
+    ],
+    "title": "Memory Effects in Irreversible Thermodynamics",
+    "year": 1961,
+    "role": "记忆核与非平衡",
+    "status": "verified"
+  },
+  {
+    "id": "ehrenfest-1933",
+    "kind": "original",
+    "authors": [
+      "Ehrenfest, P."
+    ],
+    "title": "Phase Changes in the Ordinary and Extended Sense",
+    "year": 1933,
+    "role": "相变分类源头",
+    "status": "needs-source"
+  },
+  {
+    "id": "landau-1937",
+    "kind": "original",
+    "authors": [
+      "Landau, L. D."
+    ],
+    "title": "On the Theory of Phase Transitions",
+    "year": 1937,
+    "role": "Landau 理论",
+    "status": "verified"
+  },
+  {
+    "id": "yang-lee-1952-a",
+    "kind": "original",
+    "authors": [
+      "Yang, C. N.",
+      "Lee, T. D."
+    ],
+    "title": "Statistical Theory of Equations of State and Phase Transitions I",
+    "year": 1952,
+    "role": "Yang-Lee 零点",
+    "status": "verified"
+  },
+  {
+    "id": "lee-yang-1952-b",
+    "kind": "original",
+    "authors": [
+      "Lee, T. D.",
+      "Yang, C. N."
+    ],
+    "title": "Statistical Theory of Equations of State and Phase Transitions II",
+    "year": 1952,
+    "role": "相变解析结构",
+    "status": "verified"
+  },
+  {
+    "id": "ising-1925",
+    "kind": "original",
+    "authors": [
+      "Ising, E."
+    ],
+    "title": "Contribution to the Theory of Ferromagnetism",
+    "year": 1925,
+    "role": "Ising 模型",
+    "status": "verified"
+  },
+  {
+    "id": "peierls-1936",
+    "kind": "original",
+    "authors": [
+      "Peierls, R."
+    ],
+    "title": "On Ising's Model of Ferromagnetism",
+    "year": 1936,
+    "role": "二维 Ising 有序论证",
+    "status": "verified"
+  },
+  {
+    "id": "wilson-1971",
+    "kind": "original",
+    "authors": [
+      "Wilson, K. G."
+    ],
+    "title": "Renormalization Group and Critical Phenomena",
+    "year": 1971,
+    "role": "重整化群",
+    "status": "verified"
+  },
+  {
+    "id": "wilson-kogut-1974",
+    "kind": "review",
+    "authors": [
+      "Wilson, K. G.",
+      "Kogut, J."
+    ],
+    "title": "The Renormalization Group and the epsilon Expansion",
+    "year": 1974,
+    "role": "重整化群综述",
+    "status": "verified"
+  },
+  {
+    "id": "hohenberg-halperin-1977",
+    "kind": "review",
+    "authors": [
+      "Hohenberg, P. C.",
+      "Halperin, B. I."
+    ],
+    "title": "Theory of Dynamic Critical Phenomena",
+    "year": 1977,
+    "role": "动态临界现象",
+    "status": "needs-source"
+  },
+  {
+    "id": "bcs-1957",
+    "kind": "original",
+    "authors": [
+      "Bardeen, J.",
+      "Cooper, L. N.",
+      "Schrieffer, J. R."
+    ],
+    "title": "Theory of Superconductivity",
+    "year": 1957,
+    "role": "相变应用背景",
+    "status": "needs-source"
+  },
+  {
+    "id": "anderson-1958",
+    "kind": "original",
+    "authors": [
+      "Anderson, P. W."
+    ],
+    "title": "Coherent Excited States in the Theory of Superconductivity",
+    "year": 1958,
+    "role": "对称破缺应用",
+    "status": "needs-source"
+  },
+  {
+    "id": "widom-1965",
+    "kind": "original",
+    "authors": [
+      "Widom, B."
+    ],
+    "title": "Equation of State in the Neighborhood of the Critical Point",
+    "year": 1965,
+    "role": "标度律",
+    "status": "verified"
+  },
+  {
+    "id": "fisher-1967",
+    "kind": "review",
+    "authors": [
+      "Fisher, M. E."
+    ],
+    "title": "The Theory of Equilibrium Critical Phenomena",
+    "year": 1967,
+    "role": "临界现象综述",
+    "status": "verified"
+  },
+  {
+    "id": "metropolis-1953",
+    "kind": "original",
+    "authors": [
+      "Metropolis, N.",
+      "Rosenbluth, A. W.",
+      "Rosenbluth, M. N.",
+      "Teller, A. H.",
+      "Teller, E."
+    ],
+    "title": "Equation of State Calculations by Fast Computing Machines",
+    "year": 1953,
+    "role": "Monte Carlo 抽样",
+    "status": "verified"
+  },
+  {
+    "id": "alder-wainwright-1957",
+    "kind": "original",
+    "authors": [
+      "Alder, B. J.",
+      "Wainwright, T. E."
+    ],
+    "title": "Phase Transition for a Hard Sphere System",
+    "year": 1957,
+    "role": "分子动力学与相变",
+    "status": "needs-source"
+  },
+  {
+    "id": "nose-1984",
+    "kind": "original",
+    "authors": [
+      "Nose, S."
+    ],
+    "title": "A Unified Formulation of the Constant Temperature Molecular Dynamics Methods",
+    "year": 1984,
+    "role": "恒温分子动力学",
+    "status": "needs-source"
+  },
+  {
+    "id": "hoover-1985",
+    "kind": "original",
+    "authors": [
+      "Hoover, W. G."
+    ],
+    "title": "Canonical Dynamics: Equilibrium Phase-Space Distributions",
+    "year": 1985,
+    "role": "Nosé-Hoover 动力学",
+    "status": "needs-source"
+  },
+  {
+    "id": "jaynes-1957-a",
+    "kind": "original",
+    "authors": [
+      "Jaynes, E. T."
+    ],
+    "title": "Information Theory and Statistical Mechanics I",
+    "year": 1957,
+    "role": "最大熵原理",
+    "status": "verified"
+  },
+  {
+    "id": "jaynes-1957-b",
+    "kind": "original",
+    "authors": [
+      "Jaynes, E. T."
+    ],
+    "title": "Information Theory and Statistical Mechanics II",
+    "year": 1957,
+    "role": "最大熵推断续篇",
+    "status": "verified"
+  },
+  {
+    "id": "shannon-1948",
+    "kind": "original",
+    "authors": [
+      "Shannon, C. E."
+    ],
+    "title": "A Mathematical Theory of Communication",
+    "year": 1948,
+    "role": "信息熵背景",
+    "status": "verified"
+  },
+  {
+    "id": "jarzynski-1997",
+    "kind": "original",
+    "authors": [
+      "Jarzynski, C."
+    ],
+    "title": "Nonequilibrium Equality for Free Energy Differences",
+    "year": 1997,
+    "role": "非平衡功等式",
+    "status": "verified"
+  },
+  {
+    "id": "crooks-1999",
+    "kind": "original",
+    "authors": [
+      "Crooks, G. E."
+    ],
+    "title": "Entropy Production Fluctuation Theorem and the Nonequilibrium Work Relation",
+    "year": 1999,
+    "role": "涨落定理",
+    "status": "verified"
+  },
+  {
+    "id": "gallavotti-cohen-1995",
+    "kind": "original",
+    "authors": [
+      "Gallavotti, G.",
+      "Cohen, E. G. D."
+    ],
+    "title": "Dynamical Ensembles in Nonequilibrium Statistical Mechanics",
+    "year": 1995,
+    "role": "非平衡涨落定理",
+    "status": "verified"
+  }
+]

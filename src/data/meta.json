@@ -1,0 +1,12 @@
+{
+  "generatedAt": "2026-06-03T00:00:00+08:00",
+  "conceptCount": 720,
+  "relationCount": 1424,
+  "sourceCount": 88,
+  "coverage": {
+    "verified": 182,
+    "needs-source": 240,
+    "needs-derivation": 178,
+    "needs-alignment": 120
+  }
+}
