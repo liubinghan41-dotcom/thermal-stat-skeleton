@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="热统骨架">
+  <rect width="512" height="512" rx="96" fill="#17211f" />
+  <rect x="104" y="104" width="138" height="138" rx="24" fill="#0b7d72" />
+  <rect x="270" y="104" width="138" height="138" rx="24" fill="#d9473f" />
+  <rect x="104" y="270" width="138" height="138" rx="24" fill="#b47716" />
+  <rect x="270" y="270" width="138" height="138" rx="24" fill="#506b8f" />
+</svg>

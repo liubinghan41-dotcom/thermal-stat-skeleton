@@ -15,6 +15,7 @@ import {
   Network,
   Search,
   ShieldCheck,
+  Smartphone,
 } from "lucide-react";
 import {
   conceptById,
@@ -30,6 +31,7 @@ import {
   sources,
 } from "./lib/data";
 import { MathText } from "./lib/mathText";
+import { usePwaInstall } from "./usePwaInstall";
 import type { Concept, Domain, ProofStatus, Relation, Source } from "./types";
 
 type Mode = "reading" | "graph" | "bridge" | "sources";
@@ -156,6 +158,7 @@ function App() {
       </div>
 
       <StatusBar />
+      <InstallButton />
     </div>
   );
 }
@@ -253,6 +256,43 @@ function TopBar({
         </button>
       </div>
     </header>
+  );
+}
+
+function InstallButton() {
+  const { state, promptInstall } = usePwaInstall();
+  const [showHint, setShowHint] = useState(false);
+
+  if (state === "installed" || state === "unsupported") return null;
+
+  if (state === "ios-manual") {
+    return (
+      <div className="install-fab">
+        {showHint && (
+          <div className="install-hint" role="dialog">
+            在 Safari 中点击底部 <strong>分享</strong> 按钮，选择<strong>「添加到主屏幕」</strong>即可安装到手机。
+          </div>
+        )}
+        <button
+          className="install-button"
+          type="button"
+          title="安装到主屏幕"
+          onClick={() => setShowHint((value) => !value)}
+        >
+          <Smartphone size={16} />
+          <span>安装到手机</span>
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="install-fab">
+      <button className="install-button" type="button" title="安装应用" onClick={() => void promptInstall()}>
+        <Smartphone size={16} />
+        <span>安装到手机</span>
+      </button>
+    </div>
   );
 }
 
