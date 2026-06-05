@@ -5,7 +5,7 @@
 ## 快速上手
 
 - 目标：把“拉库 -> 安装 -> 首次运行”缩到最短。
-- 推荐 Node 版本：`20.x`（项目 `.nvmrc` 为 `20`）。
+- 推荐 Node 版本：`24.x`（项目 `.nvmrc` 为 `24`；Capacitor CLI 需要 Node `>=22`）。
 
 ### 1) 安装依赖
 
@@ -55,7 +55,7 @@ npm run start:local
 ### `npm run check:env`
 会检查：
 
-- Node 版本（需满足 `package.json#engines.node`）
+- Node 版本（需满足 `package.json#engines.node`，当前为 `>=22.0.0`）
 - npm 版本（需满足 `package.json#engines.npm`）
 - 是否存在 `node_modules`
 - `package.json` / `tsconfig.json` / `vite.config.ts`
