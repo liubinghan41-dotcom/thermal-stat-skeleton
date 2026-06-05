@@ -96,6 +96,8 @@ npm run cap:apk
 
 首版 GitHub Release 会发布 debug APK，适合侧载试用；正式上架前需要单独配置 Android 签名 keystore 并生成 release APK/AAB。
 
+命令行本地打包 Android 时需要 Android SDK 与 JDK 21；如果只发布 GitHub Release，workflow 会在 runner 内自动安装对应环境。
+
 ### GitHub 首版发布
 
 推送 `v*` tag 会触发 `.github/workflows/release.yml`，自动生成并上传：
