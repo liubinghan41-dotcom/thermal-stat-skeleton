@@ -1,115 +1,159 @@
-# 热统骨架
+# 热统骨架项目（Thermal Stat Skeleton）
 
-热统骨架是一个本地 React 应用，用教材页优先的方式组织热力学与统计力学知识图谱。
+热统骨架是一个本地优先的 React/Vite 知识图谱应用，用教材页优先的方式组织热力学与统计力学概念、关系、来源和推导状态。项目支持 PWA 离线使用，并提供 Windows Web 包与 Android APK 的首版发布流程。
 
-## 功能
+## 快速上手
 
-- 720 个概念、1424 条关系、88 个来源条目的静态知识库
-- 点击概念查看定义、公式、来源和相关术语
-- 点击关系查看关系类型、假设和推导步骤
-- 热力学与统计力学桥接路径：熵、配分函数、自由能、热力学极限
-- 本地搜索、领域筛选、证明状态筛选
-- 数据生成和校验脚本，显式保留待补源、待推导、待对齐状态
+- 目标：把“拉库 -> 安装 -> 首次运行”缩到最短。
+- 推荐 Node 版本：`20.x`（项目 `.nvmrc` 为 `20`）。
 
-## 开发
+### 1) 安装依赖
 
+Windows:
 ```powershell
-npm install
-npm run generate:data
-npm run validate:data
+# 推荐先查看是否匹配
+node -v
+npm -v
+
+npm run setup
+```
+
+macOS / Linux:
+```bash
+node -v
+npm -v
+
+npm run setup
+```
+
+- `npm run setup` = `check:env` + `npm ci` + `lint:data`
+- 数据文件会在 `npm run generate:data` 时生成（`src/data/*`），因此首次安装后可直接校验通过。
+
+### 2) 本地运行
+
+```bash
 npm run dev
+# 或 Windows 常见浏览器路径启动
+npm run start:local
 ```
 
-默认开发地址：
+默认地址：`http://127.0.0.1:5173/`
 
-```text
-http://127.0.0.1:5173/
-```
+### 3) 脚本与场景命令
 
-如果端口被占用，Vite 会提示实际端口。
+- `npm run generate:data`：生成 `src/data/*`（会写 `meta.generatedAt`）
+- `npm run validate:data`：完整数据校验（概念/关系/来源/主键/引用）
+- `npm run lint:data`：`generate:data` + `validate:data`
+- `npm run check`：`lint:data` + `build`
+- `npm run package:release`：生成 `release/` + zip 发布产物（跨平台）
+- `npm run cap:sync`：执行网页构建后同步 Capacitor
+- `npm run cap:apk`：跨平台打包 Android debug apk
+- `npm run test:smoke`：冒烟脚本占位（本地自检入口）
 
-## 构建
+## 环境与安装门槛排查
 
-```powershell
-npm run build
-```
+### `npm run check:env`
+会检查：
 
-构建产物位于 `dist/`。
+- Node 版本（需满足 `package.json#engines.node`）
+- npm 版本（需满足 `package.json#engines.npm`）
+- 是否存在 `node_modules`
+- `package.json` / `tsconfig.json` / `vite.config.ts`
+- `src/data/meta.json`
+- `android/gradlew`（仅提示）
 
-## 打包
+建议任何报错按提示修复后重新执行。
 
-```powershell
+## 打包与发布
+
+### 本地发布
+
+```bash
 npm run package:release
 ```
 
-打包产物位于 `release/`：
+产物：
 
-- `thermal-stat-skeleton-web/`：可分发目录
-- `thermal-stat-skeleton-web.zip`：压缩包
+- `release/thermal-stat-skeleton-web/`
+- `release/thermal-stat-skeleton-web.zip`
 
-Windows 上解压后运行：
+Windows 下可直接运行：
 
 ```powershell
+cd release\thermal-stat-skeleton-web
 start-windows.cmd
 ```
 
-应用会通过本地静态服务器打开，不依赖后端 API。
+### Android APK
 
-## PWA（离线 + 手机安装）
-
-应用已配置为 PWA，构建后可离线使用并安装到手机/桌面：
-
-- `manifest.webmanifest`：应用名称、图标、`standalone` 显示模式（构建时自动注入）
-- Service Worker（`vite-plugin-pwa` 生成）：预缓存应用外壳、内置数据集和 KaTeX 字体，首次加载后整页（含公式）可离线
-- 安装入口：右下角「安装到手机」浮动按钮。Chrome/Edge/Android 直接弹出安装；iOS Safari 会提示通过「分享 → 添加到主屏幕」安装
-
-图标由脚本生成（无第三方依赖）：
-
-```powershell
-npm run icons
-```
-
-本地验证 PWA（Service Worker 在 `dev` 下默认关闭，需用生产构建预览）：
-
-```powershell
-npm run build
-npm run preview
-```
-
-然后在浏览器 DevTools → Application 面板检查 Manifest 与 Service Worker。
-
-## Android（Capacitor 打 APK）
-
-已接入 Capacitor，`android/` 为原生工程，`webDir` 指向 `dist/`。
-
-前置条件（仅打 APK 时需要）：Android Studio 或 Android SDK + JDK 17，并设置好 `local.properties` 中的 SDK 路径（用 Android Studio 打开一次会自动生成）。
-
-```powershell
-# 同步最新 Web 构建到原生工程
-npm run cap:sync
-
-# 用 Android Studio 打开（推荐，可直接运行/打包/调试）
-npm run cap:open
-
-# 或命令行直接打 debug APK（需本机已配置 Android SDK/Gradle）
+```bash
 npm run cap:apk
 ```
 
-`cap:apk` 产物位于：
+产物：
 
-```text
-android/app/build/outputs/apk/debug/app-debug.apk
+- `android/app/build/outputs/apk/debug/app-debug.apk`
+
+首版 GitHub Release 会发布 debug APK，适合侧载试用；正式上架前需要单独配置 Android 签名 keystore 并生成 release APK/AAB。
+
+### GitHub 首版发布
+
+推送 `v*` tag 会触发 `.github/workflows/release.yml`，自动生成并上传：
+
+- Windows Web 包：`thermal-stat-skeleton-windows-web-<tag>.zip`
+- Android debug APK：`thermal-stat-skeleton-android-debug-<tag>.apk`
+- 校验文件：`SHA256SUMS.txt`
+
+### CI 健康检查（建议）
+
+新增 GitHub Actions：`.github/workflows/ci.yml`
+
+- `npm ci`
+- `npm run lint:data`
+- `npm run build`
+
+## 数据与校对流程（Proofread）
+
+建议每次改 `src/data/*.json` 后执行：
+
+```bash
+npm run validate:data
 ```
 
-发布版 APK/AAB 需自建签名 keystore，参见 Capacitor 与 Android 官方文档。
+### 校对口径
 
-## 数据策略
+每次变更提交前确认：
 
-来源采用教材和原典双层策略。第一版中未完成页码级核验或完整推导的条目不会伪装为已核验，而是标记为：
+1. `meta.coverage`
+- 四类状态计数完整：`verified` / `needs-source` / `needs-derivation` / `needs-alignment`
+- 与概念总数一致
 
-- `verified`
-- `needs-source`
-- `needs-derivation`
-- `needs-alignment`
+2. `sourceRefs` / `termRefs`
+- 必须存在且为字符串数组
+- 全部指向有效 `id`
 
-`paper_pages/` 与 `paper_texts/` 是本地已有钢丝绳传感论文素材，当前未接入热统知识库。
+3. 空值字段
+- 概念：`title` / `summary` / `sectionTitle` / `articleSections` / `proofStatus`
+- 关系：`sourceId` / `targetId` / `type` / `statement` / `sourceRefs` / `assumptions` / `derivationSteps`
+- 来源：`title` / `status` / `authors`
+
+4. 关键桥接关系
+- `entropy -> partition-function`（`limit-bridge`）
+- `partition-function -> helmholtz-free-energy`
+- `id` 重复、关系端点缺失应一律拦截
+
+5. 人工复核清单
+- **来源**：新增引用是否可查到对应文献
+- **推导**：关系推导链是否可复现、是否存在前提假设缺失
+- **对齐**：概念定义与章节锚点是否保持同一主题口径
+
+## 常见问题
+
+- `npm run setup` 报错 npm 未找到
+  - 检查系统 PATH，或重装 Node LTS，并确认 `npm -v` 可用
+- `npm run validate:data` 失败
+  - 先执行 `npm run generate:data` 再复跑
+  - 查看报错的 `id`、引用路径是否在 `concepts.json`/`relations.json`/`sources.json` 中缺失
+- 运行后页面显示空白
+  - 检查浏览器控制台是否是数据文件 JSON 解析/加载错误
+  - 执行 `npm run check` 进行全量检查

@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const outDir = join(root, "src", "data");
 
-const generatedAt = "2026-06-03T00:00:00+08:00";
+const generatedAt = new Date().toISOString();
 
 const sourceSeeds = [
   ["callen-1985", "textbook", ["Callen, H. B."], "Thermodynamics and an Introduction to Thermostatistics", 1985, "公设化热力学与热统桥接", "verified"],
@@ -823,4 +823,5 @@ writeFileSync(join(outDir, "relations.json"), `${JSON.stringify(relationsOut, nu
 writeFileSync(join(outDir, "sources.json"), `${JSON.stringify(sourcesOut, null, 2)}\n`, "utf8");
 writeFileSync(join(outDir, "meta.json"), `${JSON.stringify(meta, null, 2)}\n`, "utf8");
 
+console.log(`[corpus] generatedAt=${meta.generatedAt}`);
 console.log(`Generated ${meta.conceptCount} concepts, ${meta.relationCount} relations, ${meta.sourceCount} sources.`);

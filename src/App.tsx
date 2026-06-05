@@ -73,6 +73,42 @@ const relationLabels: Record<Relation["type"], string> = {
   application: "应用",
 };
 
+const FALLBACK_CONCEPT: Concept = {
+  id: "__missing-concept",
+  title: "Concept unavailable",
+  aliases: [],
+  domain: "thermodynamics",
+  sectionId: "system",
+  sectionTitle: "System",
+  order: 0,
+  level: "core",
+  summary: "The referenced concept is missing from the local dataset.",
+  articleSections: [
+    {
+      heading: "数据状态",
+      body: "请先执行 npm run validate:data 进行数据一致性校验与修复。",
+    },
+  ],
+  formulas: [],
+  termRefs: [],
+  sourceRefs: [],
+  proofStatus: "needs-source",
+  tags: ["system"],
+};
+
+const FALLBACK_RELATION: Relation = {
+  id: "__missing-relation",
+  sourceId: "__missing-concept",
+  targetId: "__missing-concept",
+  type: "application",
+  label: "Missing relation",
+  statement: "The relation record is missing in current dataset.",
+  derivationSteps: ["Please regenerate and validate data first."],
+  assumptions: ["No assumptions available."],
+  sourceRefs: [],
+  proofStatus: "needs-source",
+};
+
 function App() {
   const [mode, setMode] = useState<Mode>("reading");
   const [selectedConceptId, setSelectedConceptId] = useState(defaultConceptId);
@@ -82,10 +118,10 @@ function App() {
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
 
   const deferredQuery = useDeferredValue(query);
-  const selectedConcept = conceptById.get(selectedConceptId) ?? conceptById.get(defaultConceptId)!;
+  const selectedConcept = conceptById.get(selectedConceptId) ?? conceptById.get(defaultConceptId) ?? coreConcepts[0] ?? FALLBACK_CONCEPT;
   const adjacentRelations = useMemo(() => getAdjacentRelations(selectedConcept.id), [selectedConcept.id]);
   const selectedRelation =
-    relationById.get(selectedRelationId) ?? adjacentRelations[0] ?? relationById.get(defaultRelationId)!;
+    relationById.get(selectedRelationId) ?? adjacentRelations[0] ?? relationById.get(defaultRelationId) ?? FALLBACK_RELATION;
 
   const searchResults = useMemo(
     () => searchConcepts(deferredQuery, domainFilter, statusFilter).slice(0, 12),
@@ -207,16 +243,20 @@ function TopBar({
           onChange={(event) => onQueryChange(event.target.value)}
         />
         <kbd>⌘K</kbd>
-        {query.trim() && (
+        {query.trim() ? (
           <div className="search-popover">
-            {searchResults.map((concept) => (
-              <button key={concept.id} type="button" onClick={() => onSelectConcept(concept.id)}>
-                <span>{concept.title}</span>
-                <small>{concept.sectionTitle}</small>
-              </button>
-            ))}
+            {searchResults.length === 0 ? (
+              <p className="search-empty">No matched concept for current query/filter.</p>
+            ) : (
+              searchResults.map((concept) => (
+                <button key={concept.id} type="button" onClick={() => onSelectConcept(concept.id)}>
+                  <span>{concept.title}</span>
+                  <small>{concept.sectionTitle}</small>
+                </button>
+              ))
+            )}
           </div>
-        )}
+        ) : null}
       </div>
 
       <nav className="mode-tabs" aria-label="主视图">
@@ -344,7 +384,7 @@ interface ArticleViewProps {
 }
 
 function ArticleView({ concept, relation, onSelectConcept, onSelectRelation }: ArticleViewProps) {
-  const sourceRows = concept.sourceRefs.map((id) => sourceById.get(id)).filter(Boolean) as Source[];
+  const sourceRows = (concept.sourceRefs ?? []).map((id) => sourceById.get(id)).filter(Boolean) as Source[];
 
   return (
     <article className="article-sheet">
@@ -361,27 +401,35 @@ function ArticleView({ concept, relation, onSelectConcept, onSelectRelation }: A
       </div>
 
       <header className="article-header">
-        <h1>{concept.title}</h1>
+        <h1>{concept.title || "未命名概念"}</h1>
         <div className="chips-line">
-          <span className={`domain-chip ${concept.domain}`}>{domainLabels[concept.domain]}</span>
-          <StatusBadge status={concept.proofStatus} />
-          <span className="quiet-chip">{concept.sectionTitle}</span>
+          <span className={`domain-chip ${concept.domain}`}>{domainLabels[concept.domain] ?? "未知领域"}</span>
+          <StatusBadge status={concept.proofStatus ?? "needs-source"} />
+          <span className="quiet-chip">{concept.sectionTitle || "未分类章节"}</span>
         </div>
-        <p>{concept.summary}</p>
+        <p>{concept.summary || "本条目缺少摘要，请补充并校验数据。"}</p>
       </header>
 
-      {concept.formulas.length > 0 && <FormulaBand concept={concept} />}
+      {concept.formulas.length > 0 ? (
+        <FormulaBand concept={concept} />
+      ) : (
+        <p className="panel-empty">No formulas to display.</p>
+      )}
 
       <section className="article-columns">
         <div className="article-copy">
-          {concept.articleSections.map((section) => (
-            <section className="article-section" key={section.heading}>
-              <h2>{section.heading}</h2>
-              <p>
-                <MathText text={section.body} onTermClick={onSelectConcept} />
-              </p>
-            </section>
-          ))}
+          {concept.articleSections.length > 0 ? (
+            concept.articleSections.map((section) => (
+              <section className="article-section" key={section.heading || "section"}>
+                <h2>{section.heading || "节名缺失"}</h2>
+                <p>
+                  <MathText text={section.body || "章节内容为空。"} onTermClick={onSelectConcept} />
+                </p>
+              </section>
+            ))
+          ) : (
+            <p className="panel-empty">No article sections available.</p>
+          )}
         </div>
 
         <BridgeBlock relation={relation} onSelectRelation={onSelectRelation} />
@@ -390,6 +438,7 @@ function ArticleView({ concept, relation, onSelectConcept, onSelectRelation }: A
       <section className="keyword-box">
         <h2>关键词链接</h2>
         <div className="keyword-grid">
+          {concept.termRefs.length === 0 ? <p className="panel-empty">No linked keywords in this concept.</p> : null}
           {concept.termRefs.map((id) => {
             const term = conceptById.get(id);
             if (!term) return null;
@@ -405,6 +454,7 @@ function ArticleView({ concept, relation, onSelectConcept, onSelectRelation }: A
       <section className="source-strip">
         <h2>来源</h2>
         <div>
+          {sourceRows.length === 0 ? <p className="panel-empty">No source references for this concept.</p> : null}
           {sourceRows.slice(0, 7).map((source) => (
             <SourcePill key={source.id} source={source} />
           ))}
@@ -436,17 +486,21 @@ interface BridgeBlockProps {
 }
 
 function BridgeBlock({ relation, onSelectRelation }: BridgeBlockProps) {
-  const bridge = relation.type === "limit-bridge" ? relation : relationById.get(defaultRelationId)!;
+  const bridge = relation.type === "limit-bridge" ? relation : relationById.get(defaultRelationId) ?? FALLBACK_RELATION;
+  const derivationSteps = bridge.derivationSteps?.length ? bridge.derivationSteps : ["No derivation steps available in current relation."];
+  const statement = bridge.statement || "No statement text is available for this relation.";
+  const assumptions = bridge.assumptions?.length ? bridge.assumptions : ["No assumptions provided."];
 
   return (
     <aside className="bridge-block">
       <button className="bridge-title" type="button" onClick={() => onSelectRelation(bridge.id)}>
         <GitBranch size={17} />
-        桥接: 宏观态量如何从微观分布出现
+        桥接: {bridge.label}
       </button>
-      <p>{bridge.statement}</p>
+      <p>{statement}</p>
+      {assumptions.length > 0 ? <small>{assumptions.join(" / ")}</small> : null}
       <ol>
-        {bridge.derivationSteps.slice(0, 4).map((step) => (
+        {derivationSteps.slice(0, 4).map((step) => (
           <li key={step}>
             <MathText text={step} />
           </li>
@@ -504,36 +558,44 @@ function MiniGraph({
         <span>邻近关系</span>
         <Network size={16} />
       </div>
-      <svg className="mini-graph" viewBox="0 0 340 250" role="img" aria-label={`${concept.title} 的邻近图谱`}>
-        {nodes.map((node) => (
-          <line
-            className={node.relation?.id === relation.id ? "edge active" : `edge ${node.relation?.type ?? ""}`}
-            key={`edge-${node.concept.id}`}
-            x1={center.x}
-            x2={node.x}
-            y1={center.y}
-            y2={node.y}
-            onClick={() => node.relation && onSelectRelation(node.relation.id)}
-          />
-        ))}
-        <g className="center-node" onClick={() => onSelectConcept(concept.id)}>
-          <circle cx={center.x} cy={center.y} r="38" />
-          <text x={center.x} y={center.y - 2}>
-            {concept.title.replace(/\s.+$/, "")}
-          </text>
-          <text className="notation" x={center.x} y={center.y + 16}>
-            {concept.notation ?? ""}
-          </text>
-        </g>
-        {nodes.map((node) => (
-          <g className={`mini-node ${node.concept.domain}`} key={node.concept.id} onClick={() => onSelectConcept(node.concept.id)}>
-            <rect height="30" rx="7" width="92" x={node.x - 46} y={node.y - 15} />
-            <text x={node.x} y={node.y + 4}>
-              {node.concept.title.replace(/\s.+$/, "")}
+      {nodes.length === 0 ? (
+        <p className="panel-empty">No related concepts found for current concept.</p>
+      ) : (
+        <svg className="mini-graph" viewBox="0 0 340 250" role="img" aria-label={`${concept.title} 的邻近图谱`}>
+          {nodes.map((node) => (
+            <line
+              className={node.relation?.id === relation.id ? "edge active" : `edge ${node.relation?.type ?? ""}`}
+              key={`edge-${node.concept.id}`}
+              x1={center.x}
+              x2={node.x}
+              y1={center.y}
+              y2={node.y}
+              onClick={() => node.relation && onSelectRelation(node.relation.id)}
+            />
+          ))}
+          <g className="center-node" onClick={() => onSelectConcept(concept.id)}>
+            <circle cx={center.x} cy={center.y} r="38" />
+            <text x={center.x} y={center.y - 2}>
+              {concept.title ? concept.title.replace(/\s.+$/, "") : "Concept"}
+            </text>
+            <text className="notation" x={center.x} y={center.y + 16}>
+              {concept.notation ?? ""}
             </text>
           </g>
-        ))}
-      </svg>
+          {nodes.map((node) => (
+            <g
+              className={`mini-node ${node.concept.domain}`}
+              key={node.concept.id}
+              onClick={() => onSelectConcept(node.concept.id)}
+            >
+              <rect height="30" rx="7" width="92" x={node.x - 46} y={node.y - 15} />
+              <text x={node.x} y={node.y + 4}>
+                {node.concept.title ? node.concept.title.replace(/\s.+$/, "") : "Missing"}
+              </text>
+            </g>
+          ))}
+        </svg>
+      )}
       <div className="edge-legend">
         <span className="legend-definition">定义依赖</span>
         <span className="legend-derivation">推导</span>
@@ -546,6 +608,8 @@ function MiniGraph({
 function RelationInspector({ relation, onSelectConcept }: { relation: Relation; onSelectConcept: (id: string) => void }) {
   const source = conceptById.get(relation.sourceId);
   const target = conceptById.get(relation.targetId);
+  const assumptions = relation.assumptions?.length ? relation.assumptions : ["未提供关键假设。"];
+  const derivationSteps = relation.derivationSteps?.length ? relation.derivationSteps : ["未提供推导步骤。"];
 
   return (
     <section className="side-section relation-section">
@@ -563,18 +627,18 @@ function RelationInspector({ relation, onSelectConcept }: { relation: Relation; 
         </button>
       </div>
       <div className="relation-meta">
-        <span>{relationLabels[relation.type]}</span>
-        <StatusBadge status={relation.proofStatus} />
+        <span>{relationLabels[relation.type] ?? relation.type}</span>
+        <StatusBadge status={relation.proofStatus ?? "needs-source"} />
       </div>
-      <p className="relation-statement">{relation.statement}</p>
+      <p className="relation-statement">{relation.statement || "关系说明缺失。请补齐 statement 字段。"}</p>
       <div className="assumption-list">
-        {relation.assumptions.map((assumption) => (
+        {assumptions.map((assumption) => (
           <span key={assumption}>{assumption}</span>
         ))}
       </div>
       <h3>推导步骤</h3>
       <ol className="compact-steps">
-        {relation.derivationSteps.slice(0, 5).map((step) => (
+        {derivationSteps.slice(0, 5).map((step) => (
           <li key={step}>
             <MathText text={step} onTermClick={onSelectConcept} />
           </li>
@@ -585,7 +649,7 @@ function RelationInspector({ relation, onSelectConcept }: { relation: Relation; 
 }
 
 function ReferencePanel({ concept, relation }: { concept: Concept; relation: Relation }) {
-  const sourceIds = [...new Set([...concept.sourceRefs, ...relation.sourceRefs])];
+  const sourceIds = [...new Set([...(concept.sourceRefs ?? []), ...(relation.sourceRefs ?? [])])];
   const sourceRows = sourceIds.map((id) => sourceById.get(id)).filter(Boolean) as Source[];
 
   return (
@@ -595,6 +659,7 @@ function ReferencePanel({ concept, relation }: { concept: Concept; relation: Rel
         <Library size={16} />
       </div>
       <div className="reference-table">
+        {sourceRows.length === 0 ? <p className="panel-empty">No source references for selected context.</p> : null}
         {sourceRows.slice(0, 8).map((source) => (
           <SourceRow key={source.id} source={source} />
         ))}
@@ -633,6 +698,7 @@ function FullGraphView({
         target: relation.targetId,
         type: relation.type,
       }));
+
     const xByDomain: Record<Domain, number> = {
       thermodynamics: 230,
       "mathematical-tool": 430,
@@ -662,6 +728,7 @@ function FullGraphView({
   }, []);
 
   const nodeById = useMemo(() => new Map(graph.nodes.map((node) => [node.id, node])), [graph.nodes]);
+  const selectedNode = nodeById.get(selectedConceptId) ?? FALLBACK_CONCEPT;
 
   return (
     <section className="graph-view">
@@ -670,38 +737,42 @@ function FullGraphView({
           <Network size={18} />
           <h1>全局图谱</h1>
         </div>
-        <p>展示 120 个核心节点和高优先级关系；左侧目录和搜索仍可切换到完整 720 条概念卡。</p>
+        <p>展示核心节点与高优先级关系；左侧目录和搜索仍可跳转到完整概念。</p>
       </header>
-      <svg className="full-graph" viewBox="0 0 1040 560" role="img" aria-label="热统骨架全局图谱">
-        {graph.links.map((link) => {
-          const source = typeof link.source === "string" ? nodeById.get(link.source) : link.source;
-          const target = typeof link.target === "string" ? nodeById.get(link.target) : link.target;
-          if (!source || !target) return null;
-          return (
-            <line
-              className={link.id === selectedRelationId ? "graph-edge active" : `graph-edge ${link.type}`}
-              key={link.id}
-              x1={source.x}
-              x2={target.x}
-              y1={source.y}
-              y2={target.y}
-              onClick={() => onSelectRelation(link.id)}
-            />
-          );
-        })}
-        {graph.nodes.map((node) => (
-          <g
-            className={node.id === selectedConceptId ? `graph-node ${node.domain} active` : `graph-node ${node.domain}`}
-            key={node.id}
-            onClick={() => onSelectConcept(node.id)}
-          >
-            <circle cx={node.x} cy={node.y} r={node.id === selectedConceptId ? 13 : 8} />
-            <text x={(node.x ?? 0) + 12} y={(node.y ?? 0) + 4}>
-              {node.title.replace(/\s.+$/, "")}
-            </text>
-          </g>
-        ))}
-      </svg>
+      {graph.nodes.length === 0 ? (
+        <p className="panel-empty">No graph nodes available for rendering.</p>
+      ) : (
+        <svg className="full-graph" viewBox="0 0 1040 560" role="img" aria-label="热统骨架全局图谱">
+          {graph.links.map((link) => {
+            const source = typeof link.source === "string" ? nodeById.get(link.source) : link.source;
+            const target = typeof link.target === "string" ? nodeById.get(link.target) : link.target;
+            if (!source || !target) return null;
+            return (
+              <line
+                className={link.id === selectedRelationId ? "graph-edge active" : `graph-edge ${link.type}`}
+                key={link.id}
+                x1={source.x}
+                x2={target.x}
+                y1={source.y}
+                y2={target.y}
+                onClick={() => onSelectRelation(link.id)}
+              />
+            );
+          })}
+          {graph.nodes.map((node) => (
+            <g
+              className={node.id === selectedNode?.id ? `graph-node ${node.domain} active` : `graph-node ${node.domain}`}
+              key={node.id}
+              onClick={() => onSelectConcept(node.id)}
+            >
+              <circle cx={node.x} cy={node.y} r={node.id === selectedNode?.id ? 13 : 8} />
+              <text x={(node.x ?? 0) + 12} y={(node.y ?? 0) + 4}>
+                {node.title ? node.title.replace(/\s.+$/, "") : "Missing"}
+              </text>
+            </g>
+          ))}
+        </svg>
+      )}
     </section>
   );
 }
@@ -720,6 +791,7 @@ function BridgeView({
     "rel-partition-function-helmholtz-free-energy",
     selectedRelation.id,
   ];
+
   const bridgeRelations = Array.from(
     new Map(
       bridgeIds
@@ -740,7 +812,7 @@ function BridgeView({
       </header>
       <div className="bridge-path">
         {["entropy", "partition-function", "helmholtz-free-energy", "thermodynamic-limit"].map((id) => {
-          const concept = conceptById.get(id)!;
+          const concept = conceptById.get(id) ?? FALLBACK_CONCEPT;
           return (
             <button key={id} type="button" onClick={() => onSelectConcept(id)}>
               {concept.title}
@@ -749,11 +821,12 @@ function BridgeView({
         })}
       </div>
       <div className="bridge-cards">
+        {bridgeRelations.length === 0 ? <p className="panel-empty">No bridge relations available.</p> : null}
         {bridgeRelations.map((relation) => (
           <button className="bridge-card" key={relation.id} type="button" onClick={() => onSelectRelation(relation.id)}>
             <span>{relation.label}</span>
-            <strong>{relation.statement}</strong>
-            <small>{relation.assumptions.join(" / ")}</small>
+            <strong>{relation.statement || "No statement text."}</strong>
+            <small>{(relation.assumptions ?? []).join(" / ") || "No assumption text."}</small>
           </button>
         ))}
       </div>
@@ -763,7 +836,7 @@ function BridgeView({
 }
 
 function SourcesView({ activeSourceIds }: { activeSourceIds: string[] }) {
-  const active = new Set(activeSourceIds);
+  const active = new Set(activeSourceIds ?? []);
 
   return (
     <section className="sources-view">
@@ -775,6 +848,7 @@ function SourcesView({ activeSourceIds }: { activeSourceIds: string[] }) {
         <p>教材和原典分层保存；第一版未做页码级核验的来源会保留待补状态。</p>
       </header>
       <div className="sources-list">
+        {active.size === 0 ? <p className="panel-empty">No active sources for this concept.</p> : null}
         {sources.map((source) => (
           <div className={active.has(source.id) ? "source-entry active" : "source-entry"} key={source.id}>
             <SourceRow source={source} />
@@ -790,7 +864,7 @@ function SourceRow({ source }: { source: Source }) {
   return (
     <div className="source-row">
       <StatusDot status={source.status} />
-      <span>{source.authors[0]}</span>
+      <span>{source.authors[0] ?? "Unknown"}</span>
       <em>{source.title}</em>
       <small>{source.year ?? "n.d."}</small>
     </div>
@@ -801,7 +875,7 @@ function SourcePill({ source }: { source: Source }) {
   return (
     <span className="source-pill">
       <StatusDot status={source.status} />
-      {source.authors[0]}
+      {source.authors[0] ?? "Unknown"}
     </span>
   );
 }
@@ -826,24 +900,31 @@ function StatusIcon({ status }: { status: ProofStatus }) {
 }
 
 function StatusBar() {
-  const verified = Math.round((meta.coverage.verified / meta.conceptCount) * 100);
-  const needsSource = Math.round((meta.coverage["needs-source"] / meta.conceptCount) * 100);
-  const needsDerivation = Math.round((meta.coverage["needs-derivation"] / meta.conceptCount) * 100);
+  const conceptCountSafe = Number.isFinite(meta.conceptCount) ? meta.conceptCount : 0;
+  const relationCountSafe = Number.isFinite(meta.relationCount) ? meta.relationCount : 0;
+  const sourceCountSafe = Number.isFinite(meta.sourceCount) ? meta.sourceCount : 0;
+  const generatedAt = typeof meta.generatedAt === "string" ? meta.generatedAt.slice(0, 10) : "unknown";
+  const safeCoverage = meta.coverage ?? ({} as Record<ProofStatus, number>);
+  const verified = conceptCountSafe === 0 ? 0 : Math.round(((safeCoverage.verified ?? 0) / conceptCountSafe) * 100);
+  const needsSource =
+    conceptCountSafe === 0 ? 0 : Math.round(((safeCoverage["needs-source"] ?? 0) / conceptCountSafe) * 100);
+  const needsDerivation =
+    conceptCountSafe === 0 ? 0 : Math.round(((safeCoverage["needs-derivation"] ?? 0) / conceptCountSafe) * 100);
 
   return (
     <footer className="status-bar">
       <span>
         <BookOpen size={15} /> 概览
       </span>
-      <span>概念 {meta.conceptCount}</span>
-      <span>关系 {meta.relationCount}</span>
-      <span>来源 {meta.sourceCount}</span>
+      <span>概念 {conceptCountSafe}</span>
+      <span>关系 {relationCountSafe}</span>
+      <span>来源 {sourceCountSafe}</span>
       <span className="status-text verified">已核验 {verified}%</span>
       <span className="status-text needs-source">待补源 {needsSource}%</span>
       <span className="status-text needs-derivation">待推导 {needsDerivation}%</span>
       <span className="grow" />
       <span>本地数据集</span>
-      <span>最后生成: {meta.generatedAt.slice(0, 10)}</span>
+      <span>最后生成: {generatedAt}</span>
     </footer>
   );
 }

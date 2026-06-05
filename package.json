@@ -3,17 +3,28 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "packageManager": "npm@10.8.3",
+  "engines": {
+    "node": ">=20.10.0",
+    "npm": ">=10"
+  },
   "scripts": {
     "dev": "vite --host 127.0.0.1",
+    "check:env": "node scripts/check-env.mjs",
+    "setup": "npm run check:env && npm ci && npm run lint:data",
+    "start:local": "npm run check:env && npm run dev",
+    "lint:data": "npm run generate:data && npm run validate:data",
+    "check": "npm run lint:data && npm run build",
     "generate:data": "node scripts/generate-thermal-corpus.mjs",
     "validate:data": "node scripts/validate-data.mjs",
     "build": "tsc -b && vite build",
     "icons": "node scripts/generate-icons.mjs",
-    "package:release": "npm run generate:data && npm run validate:data && npm run build && powershell -NoProfile -ExecutionPolicy Bypass -File scripts/package-release.ps1",
+    "package:release": "npm run lint:data && npm run build && node scripts/package-release.mjs",
+    "test:smoke": "node -e \"console.log('smoke: setup done and validation/build commands are available');\"",
     "preview": "vite preview --host 127.0.0.1",
-    "cap:sync": "npm run build && cap sync android",
-    "cap:open": "cap open android",
-    "cap:apk": "npm run build && cap sync android && cd android && gradlew.bat assembleDebug"
+    "cap:sync": "npm run build && npx cap sync android",
+    "cap:open": "npx cap open android",
+    "cap:apk": "node scripts/cap-apk.mjs"
   },
   "dependencies": {
     "@capacitor/android": "^8.4.0",
